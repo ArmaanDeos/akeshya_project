@@ -1,6 +1,7 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+// AOS animation
 window.addEventListener("load", () => {
   AOS.init({
     duration: 1000,
@@ -10,8 +11,7 @@ window.addEventListener("load", () => {
   });
 });
 
-// back to top
-// Define the select function
+// Back to top
 const select = (selector) => document.querySelector(selector);
 
 // Select the back-to-top element
@@ -31,3 +31,26 @@ if (backtotop) {
   window.addEventListener("load", toggleBacktotop);
   window.addEventListener("scroll", toggleBacktotop);
 }
+
+// Mobile nav toggle
+// Define the select function
+const selectToggle = (selector) => document.querySelector(selector);
+
+// Event listener for click events
+const on = (event, selector, handler) => {
+  document.addEventListener(event, function (e) {
+    if (e.target.closest(selector)) {
+      handler.call(e.target, e);
+    }
+  });
+};
+
+// Add click event listener to the mobile nav toggle
+on("click", ".mobile-nav-toggle", function (e) {
+  const navbar = selectToggle("#navbar");
+  if (navbar) {
+    navbar.classList.toggle("navbar-mobile");
+  }
+  this.classList.toggle("bi-list");
+  this.classList.toggle("bi-x");
+});
